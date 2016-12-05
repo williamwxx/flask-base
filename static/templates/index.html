@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+{% load static %}
+<html>
+<head>
+<meta charset="UTF-8">{% load staticfiles %}
+<script src= "{% static "js/jquery.min.js" %}"></script>
+<script src= "{% static "js/demo.js" %}"></script>
+<link type="text/css" rel="stylesheet" href="{% static "css/styles.css"%}">
+<title>ToDoList</title>
+ <link rel="stylesheet" href="{% static "css/styles.css"%}">
+<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}">
+<script src="{% static "js/bootstrap.min.js" %}"></script>
+<!-- Custom CSS -->
+
+<link href="{% static "css/jquerysctipttop.css" %}" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="container" id="main">
+<h1>ToDoList</h1>
+<form role="form"  action="{% url 'add'%}" id="main_input_box">
+<label>
+<input type="text" class="form-control" id="custom_textbox" name="page" placeholder="还有什么事情需要做?">
+<input type="submit" value="Add" class="btn btn-primary add_button">
+</label>
+</form>
+<ol class="list-group list_of_items">
+
+       {%for news in page_list%}
+<li id="{{ news.id }}" class="list-group-item {% if news.T_done %}completed_item{% endif %}">
+	<div class="text_holder">
+           {{news}}
+		<div class="btn-group pull-right">
+			<a class="delete btn btn-warning" href="delete?page_id={{ news.id }}">Delete</a>
+			<a class="edit btn btn-success" onclick="edit('{{ news.id }}')">Edit</a>
+		</div>
+	</div>
+	<div class="checkbox">
+		<label><input type="checkbox" class="pull-right" onclick="done('{{ news.id }}')" {% if news.T_done %}checked{% endif %}></label>
+	</div>
+</li>
+  {% endfor %}
+</ol>
+
+<!--
+	<form action="" method="post" class="edit_input_box" style="display:none">
+		<input type="text" size="50" class="itembox">
+		<input type="submit" value="submit" class="edit btn btn-success">
+	</form>
+	<div class="checkbox">
+		<label><input type="checkbox" class="pull-right"></label>
+	</div>
+
+-->
+
+
+<div class = left>
+
+        {% if page_list.has_previous %}
+            <span><a href="?page={{ page_list.previous_page_number }}">&laquo;上一页</a></span>
+        {% else %}
+            <span>&laquo;上一页</span>
+        {% endif %}
+        <span>{{ page_list.number }}/{{ page_list.paginator.num_pages }}</span>
+        {% if page_list.has_next %}
+            <span><a href="?page={{ page_list.next_page_number }}">下一页 &raquo;</a></span>
+        {% else %}
+            <span>下一页 &raquo;</span>
+        {% endif %}
+
+</div>
+
+</div>
+
+</body>
+
+</html>

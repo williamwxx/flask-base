@@ -1,0 +1,67 @@
+{% from "bootstrap/pagination.html" import render_pagination %}
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+    <script src= "{{url_for('static',filename="js/jquery.min.js") }}"></script>
+    <script src= "{{url_for('static',filename="js/demo.js") }}"></script>
+    <link type="text/css" rel="stylesheet" href="{{url_for('static',filename="css/tyles.css")}}"  type="text/css">
+     <link type="text/css" rel="stylesheet" href="{{url_for('static',filename="css/styles.css")}}"  type="text/css">
+<title>ToDoList</title>
+     <link type="text/css" rel="stylesheet" href="{{url_for('static',filename="css/styles.css")}}"  type="text/css">
+     <link type="text/css" rel="stylesheet" href="{{url_for('static',filename="css/bootstrap.min.css")}}"  type="text/css">
+      <script src= "{{url_for('static',filename="js/bootstrap.min.js") }}"></script>
+<!-- Custom CSS -->
+ <link type="text/css" rel="stylesheet" href="{{url_for('static',filename="css/bootstrap.min.css")}}" type="text/css">
+</head>
+
+<body>
+<div class="container" id="main">
+<h1>ToDoList</h1>
+<form role="form"  action="" id="main_input_box">
+<label>
+<input type="text" class="form-control" id="custom_textbox" name="page" placeholder="还有什么事情需要做?">
+<input type="submit" value="Add" class="btn btn-primary add_button">
+</label>
+</form>
+<ol class="list-group list_of_items">
+
+       {%for news in page_list%}
+<li id="{{ news.id }}" class="list-group-item {% if news.T_done %}completed_item{% endif %}">
+	<div class="text_holder">
+           {{news.Text}}
+		<div class="btn-group pull-right">
+			<a class="delete btn btn-warning" href="delete?page_id={{ news.id }}">Delete</a>
+			<a class="edit btn btn-success" onclick="edit('{{ news.id }}')">Edit</a>
+		</div>
+	</div>
+	<div class="checkbox">
+		<label><input type="checkbox" class="pull-right" onclick="done('{{ news.id }}')" {% if news.T_done %}checked{% endif %}></label>
+	</div>
+</li>
+  {% endfor %}
+</ol>
+
+<!--
+	<form action="" method="post" class="edit_input_box" style="display:none">
+		<input type="text" size="50" class="itembox">
+		<input type="submit" value="submit" class="edit btn btn-success">
+	</form>
+	<div class="checkbox">
+		<label><input type="checkbox" class="pull-right"></label>
+	</div>
+
+-->
+
+
+<div class = left>
+
+
+</div>
+
+</div>
+
+</body>
+
+</html>

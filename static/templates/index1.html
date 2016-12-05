@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title }}</title>
+</head>
+<body bgcolor="blue">
+<h1>hello {{user.name}}!<h1>
+    <li>{{ user.age }}</li>
+    <li>{{ user.sex }}</li>
+    <li>{{ user.say }}</li>
+    <li>{{ book_list.0 }}</li>
+    {% if user.age < 18 %}
+        <li>未成年</li>
+
+        {% else %}
+        <li>成年</li>
+    {% endif %}
+{% load percent %}
+<li>{{ today | date:"Y-m-d" |percent}}</li>
+
+</body>
+</html>
